@@ -2,7 +2,6 @@ import React from 'react';
 
 import { client } from '../library/client.js';
 import { Product, FooterBanner, HeroBanner } from '../components';
-import { CONFIG_FILES } from 'next/dist/shared/lib/constants.js';
 
 const Home = ({ products, bannerData }) => {
   return (
