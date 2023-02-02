@@ -2,6 +2,7 @@ import React from 'react';
 
 import { client } from '../library/client.js';
 import { Product, FooterBanner, HeroBanner } from '../components';
+import banner from '@/sneakers-ecomm-backend/schemas/banner.js';
 
 const Home = ({ products, bannerData }) => {
   return (
@@ -16,7 +17,7 @@ const Home = ({ products, bannerData }) => {
           <Product key={product?._id} product={product} />
         ))}
       </div>
-      Footer
+      <FooterBanner footerBanner={bannerData && bannerData[0]} />
     </>
   );
 };
