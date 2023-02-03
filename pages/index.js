@@ -2,12 +2,14 @@ import React from 'react';
 
 import { client } from '../library/client.js';
 import { Product, FooterBanner, HeroBanner } from '../components';
-import banner from '@/sneakers-ecomm-backend/schemas/banner.js';
 
-const Home = ({ products, bannerData }) => {
+const Home = ({ products, bannerData, bannerProductData }) => {
   return (
     <>
-      <HeroBanner heroBanner={bannerData.length && bannerData[0]} />
+      <HeroBanner
+        heroBanner={bannerData.length && bannerData[0]}
+        bannerProductData={bannerProductData && bannerProductData}
+      />
       <div className='products-heading'>
         <h2>Best Selling Kicks</h2>
         <p>See what's flying off of the shelves</p>
@@ -22,15 +24,18 @@ const Home = ({ products, bannerData }) => {
   );
 };
 
-export const getServerSideProps = async () => {
+export const getStaticProps = async () => {
   const query = '*[_type == "product"]';
   const products = await client.fetch(query);
 
   const bannerQuery = '*[_type == "banner"]';
   const bannerData = await client.fetch(bannerQuery);
 
+  const bannerProductQuery = '*[_type == "banner"][0]{product->}';
+  const bannerProductData = await client.fetch(bannerProductQuery);
+
   return {
-    props: { products, bannerData },
+    props: { products, bannerData, bannerProductData },
   };
 };
 
