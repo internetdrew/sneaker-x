@@ -3,13 +3,13 @@ import React from 'react';
 import { urlFor, client } from '@/library/client';
 
 const ProductDetails = ({ product, products }) => {
-  const { image } = product;
+  const { images } = product;
   return (
     <>
       <div className='product-detail-container'>
         <div>
           <div className='image-container'>
-            <img src={urlFor(image && image[0])} alt='' />
+            <img src={urlFor(images && images[0])} alt='' />
           </div>
           {/* <div className='small-images-container'>
             {image?.map((item, index) => (
