@@ -1,21 +1,37 @@
 import React from 'react';
+import {
+  AiOutlineMinus,
+  AiOutlineStar,
+  AiOutlinePlus,
+  AiFillStar,
+} from 'react-icons/ai';
 
 import { urlFor, client } from '@/library/client';
 
 const ProductDetails = ({ product, products }) => {
-  const { images } = product;
+  const { images, name } = product;
   return (
     <>
       <div className='product-detail-container'>
         <div>
           <div className='image-container'>
-            <img src={urlFor(images && images[0])} alt='' />
+            <img src={urlFor(images && images[0])} alt={name} />
           </div>
           {/* <div className='small-images-container'>
             {image?.map((item, index) => (
               <img key={index} src={urlFor(item)} alt='' />
             ))}
           </div> */}
+        </div>
+        <div className='product-details-desc'>
+          <h1>{name}</h1>
+          <div className='reviews'>
+            <AiFillStar />
+            <AiFillStar />
+            <AiFillStar />
+            <AiFillStar />
+            <AiOutlineStar />
+          </div>
         </div>
       </div>
     </>
