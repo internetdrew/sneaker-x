@@ -3,13 +3,18 @@ import React from 'react';
 import { urlFor, client } from '@/library/client';
 
 const ProductDetails = ({ product, products }) => {
-  console.log(product);
+  const { image } = product;
   return (
     <>
       <div className='product-detail-container'>
         <div>
           <div className='image-container'>
-            <img src={urlFor(product.image)} alt='' />
+            <img src={urlFor(image && image[0])} alt='' />
+          </div>
+          <div className='small-images-container'>
+            {image?.map((item, index) => (
+              <img key={index} src={urlFor(item)} alt='' />
+            ))}
           </div>
         </div>
       </div>
@@ -32,7 +37,7 @@ export const getStaticPaths = async () => {
 
   return {
     paths,
-    fallback: true,
+    fallback: 'blocking',
   };
 };
 
