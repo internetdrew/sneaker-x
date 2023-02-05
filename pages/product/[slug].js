@@ -6,13 +6,14 @@ import {
   AiFillStar,
 } from 'react-icons/ai';
 import { Product } from '@/components';
-
 import { urlFor, client } from '@/library/client';
+import { useStateContext } from '@/context/StateContext';
 
 const ProductDetails = ({ product, products }) => {
   const { images, name, details, price } = product;
   const [index, setIndex] = useState(0);
   const productNameSplitArr = product.name.toLowerCase().split(' ');
+  const { increaseQty, decreaseQty, qty } = useStateContext();
 
   return (
     <>
@@ -59,11 +60,11 @@ const ProductDetails = ({ product, products }) => {
           <div className='quantity'>
             <h3>Quantity:</h3>
             <div className='quantity-desc'>
-              <span className='minus'>
+              <span className='minus' onClick={decreaseQty}>
                 <AiOutlineMinus />
               </span>
-              <span className='num'>0</span>
-              <span className='plus'>
+              <span className='num'>{qty}</span>
+              <span className='plus' onClick={increaseQty}>
                 <AiOutlinePlus />
               </span>
             </div>
