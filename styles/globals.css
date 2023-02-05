@@ -418,7 +418,7 @@ span.text-red {
 }
 .product-detail-container {
   display: flex;
-  gap: 40px;
+  gap: 10rem;
   margin: 40px;
   margin-top: 60px;
   color: #324d67;
@@ -460,7 +460,7 @@ span.text-red {
   align-items: center;
 }
 
-.product-detail-desc h4 {
+.product-detail-desc h2 {
   margin-top: 10px;
 }
 .product-detail-desc p {
@@ -503,7 +503,7 @@ span.text-red {
   cursor: pointer;
   width: 200px;
   transform: scale(1, 1);
-  transition: transform 0.5s ease;
+  transition: transform 0.3s ease;
 }
 .buttons .add-to-cart:hover {
   transform: scale(1.1, 1.1);
