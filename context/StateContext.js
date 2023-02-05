@@ -8,7 +8,7 @@ export const StateContext = ({ children }) => {
   const [showCart, setShowCart] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState();
-  const [totalQuantities, setTotalQuantities] = useState();
+  const [totalQuantities, setTotalQuantities] = useState(0);
   const [qty, setQty] = useState(1);
 
   const addToCart = (product, quantity) => {
@@ -17,9 +17,6 @@ export const StateContext = ({ children }) => {
     );
 
     if (productAlreadyInCart) {
-      setTotalPrice(prevPrice => prevPrice + product.price * quantity);
-      setTotalQuantities(prevQty => prevQty + quantity);
-
       const updatedCartItems = cartItems.map(cartItem => {
         if (cartItem._id === product._id)
           return {
@@ -35,6 +32,8 @@ export const StateContext = ({ children }) => {
       product.quantity = quantity;
       setCartItems([...cartItems, { ...product }]);
     }
+    setTotalPrice(prevPrice => prevPrice + product.price * quantity);
+    setTotalQuantities(prevQty => prevQty + quantity);
 
     toast.success(
       `${qty} ${product.name}${qty > 1 ? 's' : ''} added to cart.`,
@@ -63,6 +62,7 @@ export const StateContext = ({ children }) => {
         increaseQty,
         decreaseQty,
         addToCart,
+        setShowCart,
       }}
     >
       {children}
