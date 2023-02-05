@@ -9,7 +9,7 @@ const Navbar = () => {
         <Link href='/'>Sneakers X</Link>
       </p>
       <button type='button' className='cart-icon'>
-        <AiOutlineShopping fontSize={30} />
+        <AiOutlineShopping size={35} />
         <span className='cart-item-qty'>1</span>
       </button>
     </div>
