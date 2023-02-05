@@ -6,7 +6,7 @@ import { client, urlFor } from '../library/client.js';
 const HeroBanner = ({ heroBanner, bannerProductData }) => {
   const { product } = bannerProductData;
   return (
-    <div className='hero-banner-container'>
+    <section className='hero-banner-container'>
       <div>
         <p className='beats-solo'>{heroBanner.smallText}</p>
         <h3>{heroBanner.midText.toUpperCase()}</h3>
@@ -26,7 +26,7 @@ const HeroBanner = ({ heroBanner, bannerProductData }) => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
