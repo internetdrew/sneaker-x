@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   AiOutlineMinus,
   AiOutlineStar,
@@ -8,13 +8,32 @@ import {
 import { Product } from '@/components';
 import { urlFor, client } from '@/library/client';
 import { useStateContext } from '@/context/StateContext';
+import { CONFIG_FILES } from 'next/dist/shared/lib/constants';
 
 const ProductDetails = ({ product, products }) => {
   const { images, name, details, price } = product;
   const [index, setIndex] = useState(0);
-  const productNameSplitArr = product.name.toLowerCase().split(' ');
+  const [relatedProducts, setRelatedProducts] = useState([]);
   const { increaseQty, decreaseQty, qty, addToCart } = useStateContext();
 
+  useEffect(() => {
+    const productNameSplitArr = product.name.toLowerCase().split(' ');
+
+    const similarProducts = products
+      .filter(item => item._id !== product._id)
+      .map(filtItem => {
+        const nameSplit = filtItem.name.toLowerCase().split(' ');
+        for (const word of nameSplit) {
+          if (productNameSplitArr.includes(word)) {
+            return filtItem;
+          }
+        }
+      })
+      .filter(item => item !== undefined);
+
+    setRelatedProducts(similarProducts);
+    console.log(similarProducts);
+  }, [product]);
   return (
     <>
       <div className='product-detail-container'>
@@ -83,23 +102,18 @@ const ProductDetails = ({ product, products }) => {
           </div>
         </div>
       </div>
-      <div className='maylike-products-wrapper'>
-        <h2>You may also like:</h2>
-        <div className='marquee'>
-          <div className='maylike-products-container'>
-            {products
-              .filter(item => item._id !== product._id)
-              .map(filtItem => {
-                const nameSplit = filtItem.name.toLowerCase().split(' ');
-                for (const word of nameSplit) {
-                  if (productNameSplitArr.includes(word)) {
-                    return <Product key={filtItem._id} product={filtItem} />;
-                  }
-                }
-              })}
+      {relatedProducts.length ? (
+        <div className='maylike-products-wrapper'>
+          <h2>You may also like:</h2>
+          <div className='marquee'>
+            <div className='maylike-products-container'>
+              {relatedProducts.map(product => (
+                <Product key={product._id} product={product} />
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      ) : null}
     </>
   );
 };
