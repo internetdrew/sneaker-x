@@ -8,7 +8,6 @@ import {
 import { Product } from '@/components';
 import { urlFor, client } from '@/library/client';
 import { useStateContext } from '@/context/StateContext';
-import { CONFIG_FILES } from 'next/dist/shared/lib/constants';
 
 const ProductDetails = ({ product, products }) => {
   const { images, name, details, price } = product;
@@ -32,8 +31,8 @@ const ProductDetails = ({ product, products }) => {
       .filter(item => item !== undefined);
 
     setRelatedProducts(similarProducts);
-    console.log(similarProducts);
   }, [product]);
+
   return (
     <>
       <div className='product-detail-container'>
