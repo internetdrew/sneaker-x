@@ -15,6 +15,7 @@ const HeroBanner = ({ heroBanner, bannerProductData }) => {
           src={urlFor(heroBanner.image)}
           alt='testing'
           className='hero-banner-image'
+          draggable={false}
         />
         <div>
           <Link href={`/product/${product?.slug?.current}`}>

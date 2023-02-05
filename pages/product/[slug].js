@@ -15,11 +15,15 @@ const ProductDetails = ({ product, products }) => {
       <div className='product-detail-container'>
         <div>
           <div className='image-container'>
-            <img src={urlFor(images && images[0])} alt={name} />
+            <img
+              src={urlFor(images && images[0])}
+              alt={name}
+              draggable={false}
+            />
           </div>
           {/* <div className='small-images-container'>
             {image?.map((item, index) => (
-              <img key={index} src={urlFor(item)} alt='' />
+              <img key={index} src={urlFor(item)} alt='' draggable={false}/>
             ))}
           </div> */}
         </div>

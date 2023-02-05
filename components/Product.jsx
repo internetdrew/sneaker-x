@@ -14,6 +14,7 @@ const Product = ({ product: { images, name, slug, price } }) => {
             width={250}
             height={250}
             className='product-image'
+            draggable={false}
           />
           <p className='product-name'>{name}</p>
           <p className='product-price'>${price}</p>
