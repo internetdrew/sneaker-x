@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   AiOutlineMinus,
   AiOutlineStar,
@@ -13,7 +13,10 @@ const ProductDetails = ({ product, products }) => {
   const { images, name, details, price } = product;
   const [index, setIndex] = useState(0);
   const [relatedProducts, setRelatedProducts] = useState([]);
-  const { increaseQty, decreaseQty, qty, addToCart } = useStateContext();
+  const { increaseQty, decreaseQty, qty, addToCart, showCart } =
+    useStateContext();
+
+  const productRef = useRef(null);
 
   useEffect(() => {
     const productNameSplitArr = product.name.toLowerCase().split(' ');
@@ -35,7 +38,7 @@ const ProductDetails = ({ product, products }) => {
 
   return (
     <>
-      <div className='product-detail-container'>
+      <div className='product-detail-container' ref={productRef}>
         <div>
           <div className='image-container'>
             <img
@@ -77,7 +80,7 @@ const ProductDetails = ({ product, products }) => {
           <p className='price'>${price}</p>
           <div className='quantity'>
             <h3>Quantity:</h3>
-            <div className='quantity-desc'>
+            <p className='quantity-desc'>
               <span className='minus' onClick={decreaseQty}>
                 <AiOutlineMinus />
               </span>
@@ -85,7 +88,7 @@ const ProductDetails = ({ product, products }) => {
               <span className='plus' onClick={increaseQty}>
                 <AiOutlinePlus />
               </span>
-            </div>
+            </p>
           </div>
           <div className='buttons'>
             <button

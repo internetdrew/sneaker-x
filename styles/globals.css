@@ -351,8 +351,9 @@ span.text-red {
   padding: 20px;
 }
 .product .cart-product-image {
-  width: 180px;
-  height: 150px;
+  object-fit: contain;
+  width: 150px;
+  /* height: 150px; */
   border-radius: 15px;
   background-color: #ebebeb;
 }
