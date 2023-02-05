@@ -17,12 +17,11 @@ const HeroBanner = ({ heroBanner, bannerProductData }) => {
           className='hero-banner-image'
           draggable={false}
         />
-        <div>
+        <div id='banner-cta-details'>
           <Link href={`/product/${product?.slug?.current}`}>
             <button type='button'>{heroBanner.buttonText}</button>
           </Link>
           <div className='desc'>
-            <h5>Description</h5>
             <p>{heroBanner.description}</p>
           </div>
         </div>
