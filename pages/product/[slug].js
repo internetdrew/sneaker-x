@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   AiOutlineMinus,
   AiOutlineStar,
@@ -8,10 +8,10 @@ import {
 import { Product } from '@/components';
 
 import { urlFor, client } from '@/library/client';
-import { CONFIG_FILES } from 'next/dist/shared/lib/constants';
 
 const ProductDetails = ({ product, products }) => {
   const { images, name, details, price } = product;
+  const [index, setIndex] = useState(0);
   const productNameSplitArr = product.name.toLowerCase().split(' ');
 
   return (
@@ -20,19 +20,28 @@ const ProductDetails = ({ product, products }) => {
         <div>
           <div className='image-container'>
             <img
-              src={urlFor(images && images[0])
+              src={urlFor(images && images[index])
                 .width(600)
                 .url()}
               alt={name}
+              className='product-detail-image'
               draggable={false}
-              // max-width={750}
             />
           </div>
-          {/* <div className='small-images-container'>
-            {image?.map((item, index) => (
-              <img key={index} src={urlFor(item)} alt='' draggable={false}/>
+          <div className='small-images-container'>
+            {images?.map((item, i) => (
+              <img
+                key={item._key}
+                src={urlFor(item).url()}
+                alt=''
+                draggable={false}
+                className={
+                  i === index ? 'small-image selected-image' : 'small-image'
+                }
+                onMouseEnter={() => setIndex(i)}
+              />
             ))}
-          </div> */}
+          </div>
         </div>
         <div className='product-detail-desc'>
           <h1>{name}</h1>
@@ -79,7 +88,7 @@ const ProductDetails = ({ product, products }) => {
                 const nameSplit = filtItem.name.toLowerCase().split(' ');
                 for (const word of nameSplit) {
                   if (productNameSplitArr.includes(word)) {
-                    return <Product key={filtItem.name} product={filtItem} />;
+                    return <Product key={filtItem._id} product={filtItem} />;
                   }
                 }
               })}

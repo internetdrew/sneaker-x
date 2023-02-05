@@ -426,7 +426,7 @@ span.text-red {
 
 .product-detail-image {
   border-radius: 15px;
-  background-color: #ebebeb;
+  /* background-color: #ebebeb;+ */
 
   width: 400px;
   height: 400px;
@@ -434,7 +434,7 @@ span.text-red {
   transition: 0.3s ease-in-out;
 }
 .product-detail-image:hover {
-  background-color: #f02d34;
+  /* background-color: #f02d34; */
 }
 .small-images-container {
   display: flex;
