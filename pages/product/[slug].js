@@ -13,7 +13,7 @@ const ProductDetails = ({ product, products }) => {
   const { images, name, details, price } = product;
   const [index, setIndex] = useState(0);
   const productNameSplitArr = product.name.toLowerCase().split(' ');
-  const { increaseQty, decreaseQty, qty } = useStateContext();
+  const { increaseQty, decreaseQty, qty, addToCart } = useStateContext();
 
   return (
     <>
@@ -22,7 +22,7 @@ const ProductDetails = ({ product, products }) => {
           <div className='image-container'>
             <img
               src={urlFor(images && images[index])
-                .width(600)
+                ?.width(600)
                 .url()}
               alt={name}
               className='product-detail-image'
@@ -33,7 +33,7 @@ const ProductDetails = ({ product, products }) => {
             {images?.map((item, i) => (
               <img
                 key={item._key}
-                src={urlFor(item).url()}
+                src={urlFor(item)?.url()}
                 alt=''
                 draggable={false}
                 className={
@@ -70,7 +70,11 @@ const ProductDetails = ({ product, products }) => {
             </div>
           </div>
           <div className='buttons'>
-            <button type='button' className='add-to-cart'>
+            <button
+              type='button'
+              className='add-to-cart'
+              onClick={() => addToCart(product, qty)}
+            >
               Add to Cart
             </button>
             <button type='button' className='buy-now'>
