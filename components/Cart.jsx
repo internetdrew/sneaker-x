@@ -54,7 +54,7 @@ const Cart = () => {
         {cartItems.length > 0 && (
           <div className='product-container'>
             {cartItems.map(item => (
-              <div className='product' key={item._id}>
+              <div className='product' key={item?._id}>
                 <img
                   src={urlFor(item?.images[0])}
                   alt=''
@@ -62,8 +62,8 @@ const Cart = () => {
                 />
                 <div className='item-desc'>
                   <div className='flex top'>
-                    <h5>{item.name}</h5>
-                    <h4>${item.price}</h4>
+                    <h5>{item?.name}</h5>
+                    <h4>${item?.price}</h4>
                   </div>
                   <div className='flex bottom'>
                     <div>
@@ -71,16 +71,16 @@ const Cart = () => {
                         <span
                           className='minus'
                           onClick={() =>
-                            changeCartItemQty(item._id, 'decrease')
+                            changeCartItemQty(item?._id, 'decrease')
                           }
                         >
                           <AiOutlineMinus />
                         </span>
-                        <span className='num'>{item.quantity}</span>
+                        <span className='num'>{item?.quantity}</span>
                         <span
                           className='plus'
                           onClick={() =>
-                            changeCartItemQty(item._id, 'increase')
+                            changeCartItemQty(item?._id, 'increase')
                           }
                         >
                           <AiOutlinePlus />
@@ -89,7 +89,7 @@ const Cart = () => {
                     </div>
                     <button
                       className='remove-item'
-                      onClick={() => removeItemFromCart(item._id)}
+                      onClick={() => removeItemFromCart(item?._id)}
                     >
                       <TiDeleteOutline />
                     </button>
