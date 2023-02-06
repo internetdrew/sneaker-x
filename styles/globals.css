@@ -351,6 +351,7 @@ span.text-red {
   padding: 20px;
 }
 .product .cart-product-image {
+  user-select: none;
   object-fit: contain;
   width: 150px;
   /* height: 150px; */
@@ -434,9 +435,7 @@ span.text-red {
   cursor: pointer;
   transition: 0.3s ease-in-out;
 }
-.product-detail-image:hover {
-  /* background-color: #f02d34; */
-}
+
 .small-images-container {
   display: flex;
   gap: 10px;
@@ -542,6 +541,7 @@ span.text-red {
 .quantity-desc .num {
   border-right: 1px solid gray;
   font-size: 20px;
+  user-select: none;
 }
 .quantity-desc .plus {
   color: rgb(49, 168, 49);

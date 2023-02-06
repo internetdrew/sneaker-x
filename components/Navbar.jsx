@@ -5,7 +5,7 @@ import { Cart } from './';
 import { useStateContext } from '@/context/StateContext';
 
 const Navbar = () => {
-  const { showCart, setShowCart, totalQuantities } = useStateContext();
+  const { showCart, setShowCart, itemsInCartQty } = useStateContext();
   return (
     <div className='navbar-container'>
       <p className='logo'>
@@ -17,7 +17,7 @@ const Navbar = () => {
         onClick={() => setShowCart(true)}
       >
         <AiOutlineShopping size={35} />
-        <span className='cart-item-qty'>{totalQuantities}</span>
+        <span className='cart-item-qty'>{itemsInCartQty}</span>
       </button>
       {showCart && <Cart />}
     </div>
