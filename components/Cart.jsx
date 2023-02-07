@@ -24,6 +24,8 @@ const Cart = () => {
     removeItemFromCart,
   } = useStateContext();
 
+  const handleCheckout = async () => {};
+
   return (
     <div className='cart-wrapper' ref={cartRef}>
       <div className='cart-container'>
@@ -103,7 +105,11 @@ const Cart = () => {
                 <h3>${totalPrice}</h3>
               </div>
               <div className='btn-container'>
-                <button type='button' className='btn'>
+                <button
+                  type='button'
+                  className='btn'
+                  onClick={() => handleCheckout}
+                >
                   Checkout
                 </button>
               </div>
