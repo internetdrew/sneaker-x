@@ -26,7 +26,6 @@ const Cart = () => {
   } = useStateContext();
 
   const handleCheckout = async () => {
-    console.log(cartItems);
     const stripe = await getStripe();
     const response = await fetch('/api/checkout_sessions', {
       method: 'POST',
@@ -36,7 +35,6 @@ const Cart = () => {
       body: JSON.stringify(cartItems),
     });
 
-    console.log(response.status);
     if (response.status === 500) return;
 
     const data = await response.json();

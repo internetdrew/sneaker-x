@@ -41,7 +41,7 @@ async function handler(req, res) {
           };
         }),
         mode: 'payment',
-        success_url: `${req.headers.origin}/?success=true`,
+        success_url: `${req.headers.origin}/success`,
         cancel_url: `${req.headers.origin}/?canceled=true`,
       };
       // Create Checkout Sessions from body params.
