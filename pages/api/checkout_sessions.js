@@ -21,8 +21,8 @@ async function handler(req, res) {
               'image-',
               'https://cdn.sanity.io/images/ax6crp0b/production/'
             )
-            .replace('-webp', '.webp');
-          console.log('IMAGE', newImg);
+            .replace('-webp', '.webp')
+            .replace('-png', '.png');
 
           return {
             price_data: {
