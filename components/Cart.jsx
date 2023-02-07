@@ -12,6 +12,7 @@ import toast from 'react-hot-toast';
 
 import { useStateContext } from '@/context/StateContext';
 import { urlFor } from '@/library/client';
+import getStripe from '@/library/getStripe';
 
 const Cart = () => {
   const cartRef = useRef(null);
@@ -24,7 +25,10 @@ const Cart = () => {
     removeItemFromCart,
   } = useStateContext();
 
-  const handleCheckout = async () => {};
+  const handleCheckout = async () => {
+    const stripe = await getStripe();
+    console.log(stripe);
+  };
 
   return (
     <div className='cart-wrapper' ref={cartRef}>
@@ -105,11 +109,7 @@ const Cart = () => {
                 <h3>${totalPrice}</h3>
               </div>
               <div className='btn-container'>
-                <button
-                  type='button'
-                  className='btn'
-                  onClick={() => handleCheckout}
-                >
+                <button type='button' className='btn' onClick={handleCheckout}>
                   Checkout
                 </button>
               </div>
