@@ -26,7 +26,7 @@ export const StateContext = ({ children }) => {
         })
         .filter(item => item !== undefined);
 
-      setCartItems(updatedCartItems);
+      setCartItems(prevItems => [...prevItems, updatedCartItems]);
     }
 
     if (!productAlreadyInCart) {
