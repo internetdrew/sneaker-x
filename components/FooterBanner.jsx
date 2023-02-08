@@ -36,7 +36,7 @@ const FooterBanner = ({
         </div>
 
         <img
-          src={urlFor(image)}
+          src={urlFor(image).url()}
           alt={product}
           className='footer-banner-image'
           draggable={false}

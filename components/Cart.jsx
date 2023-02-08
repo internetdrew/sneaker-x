@@ -56,7 +56,7 @@ const Cart = () => {
             {cartItems?.map(item => (
               <div className='product' key={item?._id}>
                 <img
-                  src={urlFor(item?.images?.[0])}
+                  src={urlFor(item?.images?.[0]).url()}
                   alt=''
                   className='cart-product-image'
                 />

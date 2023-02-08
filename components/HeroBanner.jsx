@@ -12,7 +12,7 @@ const HeroBanner = ({ heroBanner, bannerProductData }) => {
         <h3>{heroBanner.midText.toUpperCase()}</h3>
         <h1>{heroBanner.largeText1}</h1>
         <img
-          src={urlFor(heroBanner.image)}
+          src={urlFor(heroBanner.image).url()}
           alt='testing'
           className='hero-banner-image'
           draggable={false}
