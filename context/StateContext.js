@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
+import { BsCheckLg } from 'react-icons/bs';
 
 const Context = createContext();
 
@@ -11,28 +12,25 @@ export const StateContext = ({ children }) => {
   const [qty, setQty] = useState(1);
 
   const addToCart = (product, quantity) => {
-    const productAlreadyInCart = cartItems?.find(
+    const productAlreadyInCart = cartItems?.some(
       item => item?._id === product?._id
     );
-
-    if (productAlreadyInCart) {
-      const updatedCartItems = cartItems
-        ?.map(cartItem => {
-          if (cartItem?._id === product?._id)
-            return {
-              ...cartItem,
-              quantity: cartItem?.quantity + quantity,
-            };
-        })
-        .filter(item => item !== undefined);
-
-      setCartItems(prevItems => [...prevItems, updatedCartItems]);
-    }
 
     if (!productAlreadyInCart) {
       product.quantity = quantity;
       setCartItems(prevItems => [...prevItems, { ...product }]);
     }
+
+    if (productAlreadyInCart) {
+      const sameProduct = cartItems?.find(item => item?._id === product?._id);
+      const updatedCartItems = cartItems?.map(item => {
+        if (sameProduct) {
+          return { ...item, quantity: item.quantity + quantity };
+        }
+      });
+      setCartItems(updatedCartItems);
+    }
+
     setTotalPrice(prevPrice => prevPrice + product.price * quantity);
     setItemsInCartQty(prevQty => prevQty + quantity);
 
