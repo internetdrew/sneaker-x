@@ -53,7 +53,6 @@ const Cart = () => {
 
         {cartItems.length > 0 && (
           <div className='product-container'>
-            {console.log(cartItems)}
             {cartItems?.map(item => (
               <div className='product' key={item?._id}>
                 <Image
