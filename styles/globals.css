@@ -353,8 +353,8 @@ span.text-red {
 .product .cart-product-image {
   user-select: none;
   object-fit: contain;
-  width: 150px;
-  /* height: 150px; */
+  width: auto;
+  height: auto;
   border-radius: 15px;
   background-color: #ebebeb;
 }
@@ -713,8 +713,8 @@ span.text-red {
     padding: 20px 5px;
   }
   .product .cart-product-image {
-    width: 25%;
-    height: 25%;
+    width: auto;
+    height: auto;
   }
   .buttons .add-to-cart {
     width: 150px;

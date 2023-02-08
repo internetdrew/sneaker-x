@@ -1,5 +1,4 @@
 import React, { useRef } from 'react';
-import Link from 'next/link';
 import {
   AiOutlineMinus,
   AiOutlinePlus,
@@ -12,6 +11,7 @@ import { handleCheckout } from '@/library/utils';
 
 import { useStateContext } from '@/context/StateContext';
 import { urlFor } from '@/library/client';
+import Image from 'next/image';
 
 const Cart = () => {
   const cartRef = useRef(null);
@@ -55,10 +55,13 @@ const Cart = () => {
           <div className='product-container'>
             {cartItems?.map(item => (
               <div className='product' key={item?._id}>
-                <img
+                <Image
                   src={urlFor(item?.images?.[0]).url()}
-                  alt=''
+                  alt={`${item?.name}`}
                   className='cart-product-image'
+                  width={100}
+                  height={125}
+                  priority
                 />
                 <div className='item-desc'>
                   <div className='flex top'>
