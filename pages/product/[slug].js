@@ -14,8 +14,7 @@ const ProductDetails = ({ product, products }) => {
   const { images, name, details, price } = product;
   const [index, setIndex] = useState(0);
   const [relatedProducts, setRelatedProducts] = useState([]);
-  const { increaseQty, decreaseQty, qty, addToCart, cartItems, setCartItems } =
-    useStateContext();
+  const { increaseQty, decreaseQty, qty, addToCart } = useStateContext();
 
   const productRef = useRef(null);
 
@@ -47,28 +46,30 @@ const ProductDetails = ({ product, products }) => {
       <div className='product-detail-container' ref={productRef}>
         <div>
           <div className='image-container'>
-            <img
-              src={urlFor(images && images[index])
-                ?.width(600)
-                .url()}
-              alt={name}
-              className='product-detail-image'
-              draggable={false}
-            />
+            {images ? (
+              <img
+                src={urlFor(images[index])?.width(600).url()}
+                alt={name}
+                className='product-detail-image'
+                draggable={false}
+              />
+            ) : null}
           </div>
           <div className='small-images-container'>
-            {images?.map((item, i) => (
-              <img
-                key={item._key}
-                src={urlFor(item)?.url()}
-                alt=''
-                draggable={false}
-                className={
-                  i === index ? 'small-image selected-image' : 'small-image'
-                }
-                onMouseEnter={() => setIndex(i)}
-              />
-            ))}
+            {images
+              ? images?.map((item, i) => (
+                  <img
+                    key={item._key}
+                    src={urlFor(item)?.url()}
+                    alt={item?.name}
+                    draggable={false}
+                    className={
+                      i === index ? 'small-image selected-image' : 'small-image'
+                    }
+                    onMouseEnter={() => setIndex(i)}
+                  />
+                ))
+              : null}
           </div>
         </div>
         <div className='product-detail-desc'>
