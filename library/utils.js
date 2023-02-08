@@ -1,4 +1,6 @@
 import confetti from 'canvas-confetti';
+import getStripe from '@/library/getStripe';
+import toast from 'react-hot-toast';
 
 export const runFireworks = () => {
   var duration = 5 * 1000;
@@ -31,4 +33,24 @@ export const runFireworks = () => {
       })
     );
   }, 250);
+};
+
+export const handleCheckout = async cartItems => {
+  const stripe = await getStripe();
+  const response = await fetch('/api/checkout_sessions', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(cartItems),
+  });
+
+  if (response.status === 500) return;
+
+  const data = await response.json();
+  console.log(data);
+
+  toast.loading('Redirecting...');
+
+  stripe.redirectToCheckout({ sessionId: data.id });
 };

@@ -8,11 +8,10 @@ import {
 } from 'react-icons/ai';
 
 import { TiDeleteOutline } from 'react-icons/ti';
-import toast from 'react-hot-toast';
+import { handleCheckout } from '@/library/utils';
 
 import { useStateContext } from '@/context/StateContext';
 import { urlFor } from '@/library/client';
-import getStripe from '@/library/getStripe';
 
 const Cart = () => {
   const cartRef = useRef(null);
@@ -24,26 +23,6 @@ const Cart = () => {
     changeCartItemQty,
     removeItemFromCart,
   } = useStateContext();
-
-  const handleCheckout = async () => {
-    const stripe = await getStripe();
-    const response = await fetch('/api/checkout_sessions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(cartItems),
-    });
-
-    if (response.status === 500) return;
-
-    const data = await response.json();
-    console.log(data);
-
-    toast.loading('Redirecting...');
-
-    stripe.redirectToCheckout({ sessionId: data.id });
-  };
 
   return (
     <div className='cart-wrapper' ref={cartRef}>
@@ -124,7 +103,11 @@ const Cart = () => {
                 <h3>${totalPrice}</h3>
               </div>
               <div className='btn-container'>
-                <button type='button' className='btn' onClick={handleCheckout}>
+                <button
+                  type='button'
+                  className='btn'
+                  onClick={() => handleCheckout(cartItems)}
+                >
                   Checkout
                 </button>
               </div>

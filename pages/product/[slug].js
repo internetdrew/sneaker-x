@@ -8,15 +8,21 @@ import {
 import { Product } from '@/components';
 import { urlFor, client } from '@/library/client';
 import { useStateContext } from '@/context/StateContext';
+import { handleCheckout } from '@/library/utils';
 
 const ProductDetails = ({ product, products }) => {
   const { images, name, details, price } = product;
   const [index, setIndex] = useState(0);
   const [relatedProducts, setRelatedProducts] = useState([]);
-  const { increaseQty, decreaseQty, qty, addToCart, showCart } =
+  const { increaseQty, decreaseQty, qty, addToCart, cartItems, setCartItems } =
     useStateContext();
 
   const productRef = useRef(null);
+
+  const handleBuyNow = () => {
+    product.quantity = qty;
+    handleCheckout([product]);
+  };
 
   useEffect(() => {
     const productNameSplitArr = product.name.toLowerCase().split(' ');
@@ -98,7 +104,7 @@ const ProductDetails = ({ product, products }) => {
             >
               Add to Cart
             </button>
-            <button type='button' className='buy-now'>
+            <button type='button' className='buy-now' onClick={handleBuyNow}>
               Buy Now
             </button>
           </div>

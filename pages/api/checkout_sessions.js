@@ -3,7 +3,6 @@ const stripe = require('stripe')(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY);
 async function handler(req, res) {
   if (req.method === 'POST') {
     const cartItems = req.body;
-    console.log(cartItems);
 
     try {
       const params = {

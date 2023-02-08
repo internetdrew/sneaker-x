@@ -24,12 +24,13 @@ export const StateContext = ({ children }) => {
           };
       });
 
-      setCartItems(updatedCartItems);
+      setCartItems(prevItems => [...prevItems, updatedCartItems]);
     }
 
     if (!productAlreadyInCart) {
       product.quantity = quantity;
-      setCartItems([...cartItems, { ...product }]);
+      setCartItems(prevItems => [...prevItems, { ...product }]);
+      console.log(cartItems);
     }
     setTotalPrice(prevPrice => prevPrice + product.price * quantity);
     setItemsInCartQty(prevQty => prevQty + quantity);
@@ -61,11 +62,9 @@ export const StateContext = ({ children }) => {
 
     if (value === 'decrease') {
       if (item.quantity > 1) {
-        console.log(item);
         item.quantity -= 1;
         setTotalPrice(prevTotal => prevTotal - item.price);
         setItemsInCartQty(prevQty => prevQty - 1);
-        console.log(cartItems);
       }
     }
 
