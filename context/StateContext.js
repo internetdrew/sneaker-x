@@ -16,13 +16,15 @@ export const StateContext = ({ children }) => {
     );
 
     if (productAlreadyInCart) {
-      const updatedCartItems = cartItems?.map(cartItem => {
-        if (cartItem?._id === product?._id)
-          return {
-            ...cartItem,
-            quantity: cartItem?.quantity + quantity,
-          };
-      });
+      const updatedCartItems = cartItems
+        ?.map(cartItem => {
+          if (cartItem?._id === product?._id)
+            return {
+              ...cartItem,
+              quantity: cartItem?.quantity + quantity,
+            };
+        })
+        .filter(item => item !== undefined);
 
       setCartItems(updatedCartItems);
     }
