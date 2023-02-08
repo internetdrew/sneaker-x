@@ -48,7 +48,6 @@ export const handleCheckout = async cartItems => {
   if (response.status === 500) return;
 
   const data = await response.json();
-  console.log(data);
 
   toast.loading('Redirecting...');
 

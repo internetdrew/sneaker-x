@@ -30,7 +30,6 @@ export const StateContext = ({ children }) => {
     if (!productAlreadyInCart) {
       product.quantity = quantity;
       setCartItems(prevItems => [...prevItems, { ...product }]);
-      console.log(cartItems);
     }
     setTotalPrice(prevPrice => prevPrice + product.price * quantity);
     setItemsInCartQty(prevQty => prevQty + quantity);
