@@ -2,8 +2,27 @@ import React from 'react';
 
 import { client } from '../library/client.js';
 import { Product, FooterBanner, HeroBanner } from '../components';
+import { useQuery } from '@tanstack/react-query';
 
-const Home = ({ products, bannerData, bannerProductData }) => {
+const Home = ({ bannerData, bannerProductData }) => {
+  const {
+    isLoading,
+    data: products,
+    isError,
+    error,
+  } = useQuery(['products'], async () => {
+    const query = '*[_type == "product"]';
+    return await client.fetch(query);
+  });
+
+  if (isLoading) {
+    return <h2>Loading...</h2>;
+  }
+
+  if (isError) {
+    return <h2>Error: {error}</h2>;
+  }
+
   return (
     <>
       <HeroBanner
@@ -25,9 +44,6 @@ const Home = ({ products, bannerData, bannerProductData }) => {
 };
 
 export const getStaticProps = async () => {
-  const query = '*[_type == "product"]';
-  const products = await client.fetch(query);
-
   const bannerQuery = '*[_type == "banner"]';
   const bannerData = await client.fetch(bannerQuery);
 
@@ -35,7 +51,7 @@ export const getStaticProps = async () => {
   const bannerProductData = await client.fetch(bannerProductQuery);
 
   return {
-    props: { products, bannerData, bannerProductData },
+    props: { bannerData, bannerProductData },
   };
 };
 
