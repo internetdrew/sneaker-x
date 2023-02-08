@@ -28,9 +28,9 @@ const ProductDetails = ({ product, products }) => {
     const productNameSplitArr = product.name.toLowerCase().split(' ');
 
     const similarProducts = products
-      .filter(item => item._id !== product._id)
+      ?.filter(item => item._id !== product._id)
       .map(filtItem => {
-        const nameSplit = filtItem.name.toLowerCase().split(' ');
+        const nameSplit = filtItem?.name?.toLowerCase().split(' ');
         for (const word of nameSplit) {
           if (productNameSplitArr.includes(word)) {
             return filtItem;
@@ -115,8 +115,8 @@ const ProductDetails = ({ product, products }) => {
           <h2>You may also like:</h2>
           <div className='marquee'>
             <div className='maylike-products-container'>
-              {relatedProducts.map(product => (
-                <Product key={product._id} product={product} />
+              {relatedProducts?.map(product => (
+                <Product key={product?._id} product={product} />
               ))}
             </div>
           </div>
@@ -133,9 +133,9 @@ export const getStaticPaths = async () => {
     }
   }`;
   const products = await client.fetch(query);
-  const paths = products.map(product => ({
+  const paths = products?.map(product => ({
     params: {
-      slug: product.slug.current,
+      slug: product?.slug?.current,
     },
   }));
 
