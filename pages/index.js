@@ -2,15 +2,11 @@ import React from 'react';
 
 import { client } from '../library/client.js';
 import { Product, FooterBanner, HeroBanner } from '../components';
-import { useQuery } from '@tanstack/react-query';
+import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
+import { BsCheckLg } from 'react-icons/bs';
 
 const Home = ({ bannerData, bannerProductData }) => {
-  const {
-    isLoading,
-    data: products,
-    isError,
-    error,
-  } = useQuery(['products'], async () => {
+  const { data: products, isLoading } = useQuery(['products'], async () => {
     const query = '*[_type == "product"]';
     return await client.fetch(query);
   });
@@ -19,9 +15,11 @@ const Home = ({ bannerData, bannerProductData }) => {
     return <h2>Loading...</h2>;
   }
 
-  if (isError) {
-    return <h2>Error: {error}</h2>;
-  }
+  // console.log(products);
+
+  // if (isError) {
+  //   return <h2>Error: {error}</h2>;
+  // }
 
   return (
     <>
@@ -44,6 +42,22 @@ const Home = ({ bannerData, bannerProductData }) => {
 };
 
 export const getStaticProps = async () => {
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery(['products'], async () => {
+    const query = '*[_type == "product"]';
+    return await client.fetch(query);
+  });
+  // const {
+  //   isLoading,
+  //   data: products,
+  //   isError,
+  //   error,
+  // } = useQuery(['products'], async () => {
+  //   const query = '*[_type == "product"]';
+  //   return await client.fetch(query);
+  // });
+
   const bannerQuery = '*[_type == "banner"]';
   const bannerData = await client.fetch(bannerQuery);
 
@@ -51,7 +65,7 @@ export const getStaticProps = async () => {
   const bannerProductData = await client.fetch(bannerProductQuery);
 
   return {
-    props: { bannerData, bannerProductData },
+    props: { products: dehydrate(queryClient), bannerData, bannerProductData },
   };
 };
 
