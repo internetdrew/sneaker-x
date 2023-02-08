@@ -24,7 +24,7 @@ export const StateContext = ({ children }) => {
           };
       });
 
-      setCartItems(prevItems => [...prevItems, updatedCartItems]);
+      setCartItems(updatedCartItems);
     }
 
     if (!productAlreadyInCart) {
